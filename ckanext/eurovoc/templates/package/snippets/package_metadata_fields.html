@@ -1,0 +1,62 @@
+{% import 'macros/form.html' as form %}
+
+{% block package_metadata_fields %}
+
+  {% block package_metadata_author %}
+    {{ form.input('author', label=_('Author'), id='field-author', placeholder=_('Joe Bloggs'), value=data.author, error=errors.author, classes=['control-medium']) }}
+
+    {{ form.input('author_email', label=_('Author Email'), id='field-author-email', placeholder=_('joe@example.com'), value=data.author_email, error=errors.author_email, classes=['control-medium']) }}
+  {% endblock %}
+
+  {% block package_metadata_fields_maintainer %}
+    {{ form.input('maintainer', label=_('Maintainer'), id='field-maintainer', placeholder=_('Joe Bloggs'), value=data.maintainer, error=errors.maintainer, classes=['control-medium']) }}
+
+    {{ form.input('maintainer_email', label=_('Maintainer Email'), id='field-maintainer-email', placeholder=_('joe@example.com'), value=data.maintainer_email, error=errors.maintainer_email, classes=['control-medium']) }}
+  {% endblock %}
+
+  {% block package_metadata_fields_custom %}
+    {% block custom_fields %}
+    {% endblock %}
+  {% endblock %}
+
+  {% block dataset_fields %}
+    {% if data.groups %}
+      <div class="control-group">
+        <label class="control-label">{{ _('Groups') }}</label>
+        <div class="controls">
+          {% for group in data.groups %}
+            <label class="checkbox" for="field-group-{{ loop.index0 }}">
+              <input id="field-group-{{ loop.index0 }}" type="checkbox" name="groups__{{ loop.index0 }}__id" value="{{ group.id }}" checked="checked" />
+              {{ h.trans_dict(group).title }}
+            </label>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
+    {% set group_name = 'groups__%s__id' % data.groups|length %}
+    <div class="control-group control-medium">
+      <label class="control-label" for="field-group">{{_('Add Group')}}</label>
+      <div class="controls ">
+        <select id="field-group" name="{{group_name}}" data-module="autocomplete">
+            <option value=""></option>
+          {% for group in h.eurovoc_domains() %}
+            <option value="{{ group.id }}">{{ h.trans_dict(group).title }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="field-eurovoc_thesaurus">{{ _("Eurovoc sub group") }}</label>
+      <div class="controls">
+        <select id="field-eurovoc_thesaurus" name="eurovoc_thesaurus" data-module="autocomplete">
+          {% for thes in h.eurovoc_thesauruses()  %}
+            <option value="{{ thes }}" {% if thes in data.get('eurovoc_thesaurus', []) %}selected="selected"{% endif %}>{{ h.trans_dict({'thes': thes}).thes }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+  {% endblock %}
+
+{% endblock %}
