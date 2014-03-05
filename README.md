@@ -1,3 +1,5 @@
+<img src="http://oppnadata.se/img/sv-2rader.png" alt="Öppna Data Logo" width="300">
+
 ckanext-opendata
 ================
 
