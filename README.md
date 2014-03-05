@@ -1,7 +1,7 @@
 ckanext-opendata
 ================
 
-> CKAN extension for oppnadata.se (Öppna Data) for Vinnova.
+> CKAN extension for [oppnadata.se](http://oppnadata.se) (Öppna Data) for Vinnova.
 
 ## Sub extensions
 
