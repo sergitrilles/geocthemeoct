@@ -1,16 +1,11 @@
-<img src="http://oppnadata.se/img/sv-2rader.png" alt="Öppna Data Logo" width="300">
+ckanext-odp_theme
+=================
 
-ckanext-opendata
-================
+OpenDataPhilly.org CKAN theme
 
-> CKAN extension for [oppnadata.se](http://oppnadata.se) (Öppna Data) for Vinnova.
+Manually generating main.css
+----------------------------
 
-## Sub extensions
+Run `sass ckanext/odp_theme/public/css/sass/main.scss ckanext/odp_theme/public/css/main.css`
 
-### Blog functionality
-
-Extension path: `./ckanext/blog`.
-
-### Eurovoc taxonomy support
-
-Extension path: `./ckanext/eurovoc`.
+This will be done automatically when deploying via ansible.
